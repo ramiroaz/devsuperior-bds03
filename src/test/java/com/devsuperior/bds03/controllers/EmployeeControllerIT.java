@@ -106,7 +106,7 @@ public class EmployeeControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-		EmployeeDTO dto = new EmployeeDTO(null, "   ", "joaquim@gmail.com", 1L);
+		EmployeeDTO dto = new EmployeeDTO(null, "   ", "joaquim@gmail.com", 1L);  //nome em branco
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
@@ -126,7 +126,7 @@ public class EmployeeControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-		EmployeeDTO dto = new EmployeeDTO(null, "Joaquim", "joaquim@", 1L);
+		EmployeeDTO dto = new EmployeeDTO(null, "Joaquim", "joaquim@", 1L);   //e-mail inválio
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
@@ -138,7 +138,7 @@ public class EmployeeControllerIT {
 		
 		result.andExpect(status().isUnprocessableEntity());
 		result.andExpect(jsonPath("$.errors[0].fieldName").value("email"));
-		result.andExpect(jsonPath("$.errors[0].message").value("Email inválido"));
+		result.andExpect(jsonPath("$.errors[0].message").value("E-mail invalido"));
 	}
 
 	@Test
@@ -146,7 +146,7 @@ public class EmployeeControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-		EmployeeDTO dto = new EmployeeDTO(null, "Joaquim", "joaquim@gmail.com", null);
+		EmployeeDTO dto = new EmployeeDTO(null, "Joaquim", "joaquim@gmail.com", null);  //department está nulo
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =
